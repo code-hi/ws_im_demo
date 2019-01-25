@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>swoole+websocket简易聊天室demo - 代码汇</title>
+</head>
+<body>
+	昵称：<input type="text" id="name" value="" placeholder="昵称">
+	<button type="button" onclick="onopen()">连接</button>
+	<button type="button" onclick="onclo()">断开</button>
+	<br/>
+	<textarea id="box" style="width: 50%;height: 300px;display: block" readonly></textarea>
+	<input type="text" id="message" value="">
+	<button type="button" onclick="send()">发送</button>
+</body>
+<script  src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script>
+	var ws;
+	function onopen(){
+		if(ws){ alert('已经连接');return false; }
+		ws = new WebSocket('ws://192.168.73.128:9502');
+		var name = $('#name').val();
+		ws.onopen = function(event){
+			push("连接成功");
+			ws.send(JSON.stringify({'type': 'login', 'data': name}));
+		}
+
+		ws.onclose = function(event){
+			push("连接关闭");	
+		}
+
+		ws.onerror = function(event){
+			push("连接错误");	
+		}
+		ws.onmessage = function(event){
+			push(event.data);
+		}
+	}
+
+	function onclo(){
+		if(!ws){ alert('请先连接');return false; }
+		ws.close();
+		ws = null;
+	}
+
+	function push(val){
+		console.log(val);
+		$('#box').append(val + '\r\n');
+		$('#box').scrollTop($('#box')[0].scrollHeight);
+	}
+
+	function send(){
+		if(!ws){ alert('请先连接');return false; }
+		var message = $('#message').val();
+		ws.send(JSON.stringify({'type':'message', 'data': message}));
+		$('#message').val('');
+	}
+</script>
+</html>
