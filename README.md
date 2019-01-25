@@ -1,4 +1,4 @@
-###swoole+websocket简易聊天室demo
+### swoole+websocket简易聊天室demo
 `swoole`文档地址：[https://wiki.swoole.com](https://wiki.swoole.com "https://wiki.swoole.com")
 
 首先确保`centos`服务器已经安装`swoole`环境，php7以上版本。
