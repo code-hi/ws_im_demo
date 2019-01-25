@@ -9,4 +9,5 @@
 	php ws_server.php`
 
 浏览器打开`index.html`，输入昵称，点击连接一个简单的聊天室就完成了。
+
 [![swoole+websocket简易聊天室demo](https://raw.githubusercontent.com/code-hi/ws_im_demo/master/test/swoole_websocket_im_demo.png)](http://www.codehui.net)
