@@ -6,7 +6,7 @@
 
 运行脚本，不报错说明运行成功。
 
-	php ws_server.php`
+	php ws_server.php
 
 浏览器打开`index.html`，输入昵称，点击连接一个简单的聊天室就完成了。
 
